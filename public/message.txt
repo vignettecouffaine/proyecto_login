@@ -1,0 +1,100 @@
+import React, { useState, useEffect } from 'react';
+
+
+const ReprobadosComponent = () => {
+    const [estudiantes, setEstudiantes] = useState([]);
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+    useEffect(() => {
+        // Aquí deberías realizar una solicitud al backend para obtener los datos de los estudiantes
+        fetch('http://localhost:3000/usuarios') // Cambia '/api/estudiantes' por la ruta correcta de tu backend
+            .then(response => response.json())
+            .then(data => setEstudiantes(data))
+            .catch(error => console.error('Error al obtener estudiantes:', error));
+    }, []);
+
+    // Función para abrir el modal de editar
+    const handleEditClick = () => {
+        setShowEditModal(true);
+    };
+
+    // Función para cerrar el modal de editar
+    const handleCloseEditModal = () => {
+        setShowEditModal(false);
+    };
+
+    // Función para abrir el modal de eliminar
+    const handleDeleteClick = () => {
+        setShowDeleteModal(true);
+    };
+
+    // Función para cerrar el modal de eliminar
+    const handleCloseDeleteModal = () => {
+        setShowDeleteModal(false);
+    };
+
+    return (
+        <div className="container mx-auto py-8">
+            <h1 className="text-2xl font-bold mb-4">Tabla de Estudiantes</h1>
+            <div className="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative">
+                <table className="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative">
+                    <thead>
+                        <tr className="text-left">
+                            <th className="py-2 px-3 sticky top-0 border-b border-gray-200 bg-green-500 text-white">Nombre del Estudiante</th>
+                            <th className="py-2 px-3 sticky top-0 border-b border-gray-200 bg-green-500 text-white">Correo</th>
+                            <th className="py-2 px-3 sticky top-0 border-b border-gray-200 bg-green-500 text-white">Matemáticas</th>
+                            <th className="py-2 px-3 sticky top-0 border-b border-gray-200 bg-green-500 text-white">Inglés</th>
+                            <th className="py-2 px-3 sticky top-0 border-b border-gray-200 bg-green-500 text-white">Artes</th>
+                            <th className="py-2 px-3 sticky top-0 border-b border-gray-200 bg-green-500 text-white"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {estudiantes.map(estudiante => (
+                            <tr key={estudiante.id}>
+                                <td className="border-dashed border-t border-gray-200">{estudiante.nombre}</td>
+                                <td className="border-dashed border-t border-gray-200">{estudiante.correo}</td>
+                                <td className="border-dashed border-t border-gray-200">{estudiante.matematicas}</td>
+                                <td className="border-dashed border-t border-gray-200">{estudiante.ingles}</td>
+                                <td className="border-dashed border-t border-gray-200">{estudiante.artes}</td>
+                                <td className="border-dashed border-t border-gray-200">
+                                    <button onClick={handleEditClick} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Editar</button>
+                                    <button onClick={handleDeleteClick} className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Eliminar</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+            {/* Modal de Editar */}
+            {showEditModal && (
+                <div className="fixed inset-0 w-full h-full z-20 flex justify-center items-center">
+                    <div className="absolute inset-0 bg-black opacity-50"></div>
+                    <div className="bg-white p-8 rounded-lg shadow-lg w-1/3 z-30">
+                        <p className="text-lg font-semibold mb-4">¿Desea editar este alumno?</p>
+                        {/* Aquí puedes colocar los campos de edición */}
+                        <div className="flex justify-end">
+                            <button onClick={handleCloseEditModal} className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded mr-2">Cancelar</button>
+                            <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {/* Modal de Eliminar */}
+            {showDeleteModal && (
+                <div className="fixed inset-0 w-full h-full z-20 flex justify-center items-center">
+                    <div className="absolute inset-0 bg-black opacity-50"></div>
+                    <div className="bg-white p-8 rounded-lg shadow-lg w-1/3 z-30">
+                        <p className="text-lg font-semibold mb-4">¿Estás seguro que deseas eliminar este estudiante?</p>
+                        <div className="flex justify-end">
+                            <button onClick={handleCloseDeleteModal} className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded mr-2">Cancelar</button>
+                            <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default ReprobadosComponent;

@@ -1,0 +1,95 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #004d00; /* Cambio del color de fondo a verde oscuro */
+  font-family: sans-serif;
+  font-weight: 100;
+}
+
+.container {
+  position: absolute;
+  top: 20%; /* Ajuste la distancia desde la parte superior según su preferencia */
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center; /* Alineación centrada */
+}
+
+table {
+  display: inline-block; /* Hace que la tabla se ajuste al tamaño del contenido */
+  width: auto; /* Ancho automático basado en el contenido */
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  padding: 15px;
+  background-color: rgba(56, 133, 1, 0.99);
+  color: #fff;
+  text-align: center; /* Alineación centrada */
+}
+
+th {
+  text-align: center; /* Alineación centrada */
+}
+
+thead th {
+  background-color:#23b654;
+}
+
+tbody tr:hover {
+  background-color: rgba(37, 255, 37, 0.86);
+}
+
+td {
+  position: relative;
+}
+
+td:hover:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -9999px;
+  bottom: -9999px;
+  background-color: rgba(37, 255, 37, 0.86);
+  z-index: -1;
+}
+
+.welcome-message {
+  font-size: 30px; /* Ajuste el tamaño del mensaje de bienvenida */
+  color: #07ff037b;
+  font-weight: bold;
+  margin-bottom: 30px; /* Espacio entre el mensaje de bienvenida y la tabla */
+}
+
+.my-button {
+  padding: 10px 20px;
+  background-color: #23b654;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.my-button:hover {
+  background-color: #1ac40a;
+}
+
+.my-button:active {
+  background-color: #26a80c;
+}
+
+.table-container {
+  margin-top: 100px; /* Ajusta este valor según sea necesario */
+}
+
+.texto-bienvenida {
+  text-align: center;
+  color: #ffffff;
+  font-size: 30px; /* Tamaño de letra más grande */
+  font-weight: bold; /* Letra en negritas */
+}
